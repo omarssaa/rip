@@ -1,0 +1,36 @@
+{% extends "chemistryBase.html" %}
+{% block title %}pH{% endblock %}
+{% block k %}
+<h3>The pH is the measure of the concentration of positive hydrogen ions [H<sup>+</sup>](protons for short) or hydronium ions 
+[H<sub>3</sub>O<sup>+</sup>] in a solution. It is also the measure of the acidity 
+or alkalinity(basicity) of a solution.</h3>
+<p>The pH is based on a logarithmic scale ranging from 0 as a minmum value to 14 as a maximum value.</p>
+<p>\(pH=-log([H^+])\)</p>
+or
+<p>\(pH=-log([H_3 O^+])\)</p>
+<p>Where the square brackets refer to the concentration of the protons or hydronium ions.</p>
+<button onclick="changeLang('en');">English</button>
+    <button onclick="changeLang('ar');">Arabic</button>
+    <p id="Text"></p>
+    <script src="{{ url_for('static', filename='test.js') }}"></script>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock k %}

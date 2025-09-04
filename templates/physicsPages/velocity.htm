@@ -1,0 +1,42 @@
+{% extends "physicsBase.html" %}
+{% block title %}Velocity{% endblock %}
+{% block k %}
+<p>The velocity is a vector quantity (it has a magnitude and a direction) and is defined as the rate of change of the displacement during a time interval.</p>
+<p style="font-size: 30px;">\(v=\frac{&#x394;x}{&#x394;t}\)</p>
+\(v\): velocity<br>
+\(&#x394;x\): change in displacement<br>
+\(&#x394;t\): change in time<br>
+<label for="displacement">Displacement(m): </label>
+<input type="number" id="displacement"><br>
+<label for="time">Time(s): </label>
+<input type="number" id="time"><br>
+<button onclick="velocity();">Answer</button>
+<p id="velocity">Velocity(m/s): </p>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    var vst = document.getElementById("velocity").textContent;
+    function velocity(){
+        var v = document.getElementById("displacement").value / document.getElementById("time").value;
+        document.getElementById("velocity").textContent = vst + v;
+    }
+</script>
+{% endblock %}

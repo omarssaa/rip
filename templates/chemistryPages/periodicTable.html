@@ -1,0 +1,58 @@
+{% extends 'chemistryBase.html' %}
+{% block title %}Periodic Table{% endblock %}
+{% block k %}
+<h3>Matter consists of atoms and atoms have different types, each type is an element.</h3>
+<h6>
+    There is currently 118 different elements that have been discovered. Obviously, memorising this big number of elements is a tedious work. So, we need something that will contain 
+    at least basic information about all the elements. Here, the periodic table steps in.
+</h6>
+<p>The periodic table is a table that contains basic information about all the elements, like their atomic number, symbol, atomic mass and the number of valence electrons.</p>
+<img src="{{ url_for('static', filename='Periodic_table_large.svg') }}" alt="The periodic table">
+<p>
+    As we can see from the table above, the periodic table has 18 vertical groups and 7 horizontal periods. Each group contains elements with similar properties and electronic 
+    configuration, while the elements in a period have the same number of electron shells.
+</p>
+<div class="text-left">
+    <p>Periodic properties of the elements:</p>
+    <ul style="margin-left: 20px;">
+        <li>
+            The metallic property decreases as we go from left to right through the same period, while it increases from top to down through the same group.
+        </li>
+        <li>
+            The atomic radius decreases from left to right through the same period, while it increases from top to bottom through the same group.
+        </li>
+        <li>
+            The ionization energy increases from left to right through the same period, while it decreases from top to bottom through the same group.
+        </li>
+    </ul>
+    <p>Elements can be classified into 3 main groups: Metals, Metalloids(semi-metals) and Non-metals.</p>
+    <p>Metals usually form ionic compounds with non-metals, metallic bonds with metals, and in some cases metals can form covalent bonds with non-metals and/or metals.</p>
+</div>
+<img src="{{ url_for('static', filename='Dilithium_100.png') }}" alt="Dilithium">
+<img src="{{ url_for('static', filename='Sodium_oxide_100.png') }}" alt="Sodium Oxide">
+<img src="{{ url_for('static', filename='Aluminum_chloride_100.png') }}" alt="Aluminum Chloride"><br>
+<cite>
+    On the left is dilithium, a metal-metal covalent bond. In the middle, sodium oxide, an example of ionic bond. And on the right Aluminum chloride, an example of 
+    metal to non-metal covalent bond.<br> Source: <a href="https://pubchem.ncbi.nlm.nih.gov">https://pubchem.ncbi.nlm.nih.gov</a>
+</cite>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

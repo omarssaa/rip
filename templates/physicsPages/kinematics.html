@@ -1,0 +1,50 @@
+{% extends "physicsBase.html" %}
+{% block title %}Kinematics{% endblock %}
+{% block k %}
+<h4>
+    The kinematics equations are a set of four equations that can be utilized to predict unknown information about an object's motion if other information is known.<br>
+    In other words they are equations that link the velocity, acceleration, time and displacement.<br>
+</h4>
+<h5>
+    The equations for linear kinematics are:<br>
+    1) \(v = v_0 + at\)<br>
+    2) \(&#x394;x = (\frac{v + v_0}{2})t\)<br>
+    3) \(&#x394;x = v_0t + at^2\)<br>
+    4) \(v^2 = v_0^2 + 2a&#x394;x\)
+</h5>
+<h6>
+    In which:<br>
+    &rArr;\(&#x394;x\) is displacement (or position)<br>
+    &rArr;\(v\) is final velocity<br>
+    &rArr;\(v_0\) is initial velocity<br>
+    &rArr;\(a\) is acceleration<br>
+    &rArr;\(t\) is time
+</h6>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    var vst = document.getElementById("velocity").textContent;
+    function velocity(){
+        var v = document.getElementById("displacement").value / document.getElementById("time").value;
+        document.getElementById("velocity").textContent = vst + v;
+    }
+</script>
+{% endblock %}

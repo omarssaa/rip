@@ -1,0 +1,47 @@
+{% extends "physicsBase.html" %}
+{% block title %}Weight{% endblock %}
+{% block k %}
+<p>The weight is a force and a vector quantity (it has a magnitude and a direction). It is defined as the force acting on an object due to gravity.</p>
+<p style="font-size: 30px;">\(F_w=mg\)</p>
+\(F_w\): the weight<br>
+\(m\): the mass of an object<br>
+\(g\): gravity<br>
+<label for="mass">Mass(kg): </label>
+<input type="number" id="mass"><br>
+<label for="gravity">Gravity(N/kg): </label>
+<input type="number" id="gravity" placeholder="default is 9.8"><br>
+<button onclick="weight();">Answer</button>
+<p id="weight">Weight(N): </p>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    var vst = document.getElementById("weight").textContent;
+    function weight(){
+        if (document.getElementById("gravity").value != ""){
+            let w = document.getElementById("mass").value * document.getElementById("gravity").value;
+        } else {
+            let w = document.getElementById("mass").value * 9.8;
+        }
+        w = w.toFixed(2);
+        document.getElementById("weight").textContent = vst + w;
+    }
+</script>
+{% endblock %}

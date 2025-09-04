@@ -1,0 +1,72 @@
+{% extends "chemistryBase.html" %}
+{% block title %}Electronegativity{% endblock %}
+{% block k %}
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    table {
+        margin: 0px auto 0px auto; 
+    }
+    td, th {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    p {
+        margin: 20px 100px 20px 100px;
+    }
+</style>
+<h4>Have you ever wondered how the bonds between atoms were classified to be covalent or ionic? Well, this page will tell some information about this topic.</h4>
+<h3>Electronegativity(\(\chi\)) is a measure of the ability of an atom to attract the shared electrons of the chemical bond towards itself.</h3>
+<p>Electronegativity itself depend on some factors like the atomic number and the distance between the valence shell electrons and the nucleus.</p>
+<p>The electronegativity increases as we go from left to right through the period. Whereas it usually decreases from the top of the group to the bottom of it.</p>
+<img src="{{ url_for('static', filename='Electronegative.jpg') }}" alt="Electronegativity">
+<p>The reason why the electronegativity increases from left to right is due to the increase in atomic number from left to right while the number of electron shells 
+    remain the same, so the attraction force of electrons towards the nucleus increases and the atomic radius decreases which results in the increase of electronegativity.
+</p>
+<p>On the other hand, it decreases from top to bottom because the number of electron shells increase and the shielding(screening) effect increases, so the attraction force 
+    of electrons towards the nucleus decreases and the atomic radius decreases resulting in the decrease in electronegativity.
+</p>
+<p>A useful way to determine the type of a bond between two atoms is by determining the difference in electronegativity between those two atoms.</p>
+<p>You can use two ways to determine the type of bonds according to the difference in electronegativity whether by using the table below, or by using the
+    Van Arkel&hyphen;Ketelaar triangle.</p>
+<table>
+    <tr>
+        <th>Difference in electronegativity (\(&Delta;\chi\))</th>
+        <th>Type of bond</th>
+    </tr>
+    <tr>
+        <td>0&le;(\(&Delta;\chi\))&lt;0.4</td>
+        <td>Non-polar covalent bond</td>
+    </tr>
+    <tr>
+        <td>0.4&le;(\(&Delta;\chi\))&lt;1.7</td>
+        <td>Polar covalent</td>
+    </tr>
+    <tr>
+        <td>1.7&le;(\(&Delta;\chi\))</td>
+        <td>Ionic</td>
+    </tr>
+</table>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock k %}

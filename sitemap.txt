@@ -1,0 +1,3 @@
+https://randomip.pythonanywhere.com/
+https://randomip.pythonanywhere.com/chemistry
+https://randomip.pythonanywhere.com/physics

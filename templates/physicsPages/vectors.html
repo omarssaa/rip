@@ -1,0 +1,42 @@
+{% extends "physicsBase.html" %}
+{% block title %}Vectors{% endblock %}
+{% block k %}
+<h3>Vectors are quantities that require a magnitude and a direction.</h3>
+<p>A vector can be divided into two components: the horizontal (x) component and the vertical (y) component.</p>
+<div class="text-left">
+    <p>\(V_x = V cos&theta; \)</p>
+    <p>\(V_y = V sin&theta;\)</p>
+    In which:<br>
+    \(V_x\) is the x component (the symbol change according to the quantity but the subscript remains).<br>
+    \(V_y\) is the y component (the symbol change according to the quantity but the subscript remains).<br>
+    \(V\) is the vector (the symbol change according to the quantity).<br>
+    &theta; is the angle between the vector and the horizontal (x) axis.
+    <p>If we were to use the angle between the vector and the y axis, we would switch the sin and cos in the equations, so:</p>
+    <p>\(V_x = V sin&theta; \)</p>
+    <p>\(V_y = V cos&theta;\)</p>
+    \(V_x\) is the x component (the symbol change according to the quantity but the subscript remains).<br>
+    \(V_y\) is the y component (the symbol change according to the quantity but the subscript remains).<br>
+    \(V\) is the vector (the symbol change according to the quantity).<br>
+    &theta; is the angle between the vector and the vertical (y) axis.
+</div>
+<div class="text-left">
+    {% if current_user.is_authenticated %}
+    <form action="/comment/post" method="post">
+        <div class="form-group">
+            <label for="comment">Share your comment:</label>
+            <textarea class="form-control" name="comment" id="comment" cols="30" rows="10" placeholder="Type your comment here"></textarea>
+            <button type="submit">Post</button>
+        </div>
+    </form>
+    {% endif %}
+    <div>
+        {% for comment in comments %}
+        <div>
+            <small style="color: blue;">{{ comment.commenter.name }}</small><br>
+            <small style="color: red; padding-left: 20px;">{{ comment.comment_text }}</small><br>
+            <small style="color: black; padding-left: 20px;">{{ comment.comment_date }}</small><br>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
